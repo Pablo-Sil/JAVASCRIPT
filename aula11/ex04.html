@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imigração</title>
+</head>
+<body>
+    <h1>GUICHÊ IMIGRAÇÂO</h1>
+    Passaporte <input type="text" id="text">
+    <button = onclick="Verificar()">Verificar</button>
+    <div id="res">
+
+    </div>
+    <script>
+        function Verificar () {
+        var país = 'Brasil'
+        var textv = window.document.querySelector('#text').value 
+        var res = window.document.querySelector('div#res')
+       
+        if (textv === país){
+            res.innerHTML= ` Seu estatus atual é de nativo`
+        } else {
+            res.innerHTML= `<p><b>ESTRANGEIRO</b></p>`
+        }
+        
+    }
+    </script>
+
+   
+    
+</body>
+</html>
