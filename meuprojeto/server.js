@@ -1,18 +1,19 @@
 const express = require('express');
 const fs = require('fs');
 const pdf = require('pdf-parse');
+const path = require('path'); // Importe a biblioteca 'path' para manipular caminhos de arquivos.
 
 const app = express();
 const porta = 8081;
 
 app.use(express.static('public'));
-app.get('/',(req, res) =>{
+app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/pesquisar', (req, res) => {
   const palavraPesquisada = req.query.palavra;
-  const pastaComPDFs = 'C:/Users/pablo/OneDrive/Documentos/GitHub/JavaScript/meuprojeto/'; // caminho para pasta com arquivos PDF
+  const pastaComPDFs = 'C:/Users/pablo/OneDrive/Documentos/GitHub/JavaScript/meuprojeto/seuarquivo.pdf/'; // Caminho para a pasta com arquivos PDF
   const resultados = [];
 
   fs.readdir(pastaComPDFs, (err, arquivos) => {
@@ -24,7 +25,7 @@ app.get('/pesquisar', (req, res) => {
     const arquivosPDF = arquivos.filter(arquivo => arquivo.endsWith('.pdf'));
 
     arquivosPDF.forEach(arquivo => {
-      const caminhoArquivo = `${pastaComPDFs}/${arquivo}`;
+      const caminhoArquivo = path.join(pastaComPDFs, arquivo); // Use 'path.join' para criar o caminho completo do arquivo.
       const dataBuffer = fs.readFileSync(caminhoArquivo);
 
       pdf(dataBuffer).then(data => {
