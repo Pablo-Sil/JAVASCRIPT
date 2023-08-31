@@ -3,13 +3,16 @@ const fs = require('fs');
 const pdf = require('pdf-parse');
 
 const app = express();
-const porta = 3001;
+const porta = 8081;
 
 app.use(express.static('public'));
+app.get('/',(req, res) =>{
+  res.sendFile(__dirname + '/public/index.html');
+});
 
 app.get('/pesquisar', (req, res) => {
   const palavraPesquisada = req.query.palavra;
-  const pastaComPDFs = '.C:\Users\pablo\OneDrive\Documentos\GitHub\JavaScript\meuprojeto\seuarquivo.pdf'; // Substitua pelo caminho para sua pasta com arquivos PDF
+  const pastaComPDFs = 'C:/Users/pablo/OneDrive/Documentos/GitHub/JavaScript/meuprojeto/'; // caminho para pasta com arquivos PDF
   const resultados = [];
 
   fs.readdir(pastaComPDFs, (err, arquivos) => {
