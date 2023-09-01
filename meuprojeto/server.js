@@ -30,10 +30,10 @@ app.get('/pesquisar', (req, res) => {
 
       pdf(dataBuffer).then(data => {
         const texto = data.text.toLocaleLowerCase();
-        const textoSemPontuacao = texto.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ');
+        const textoSemPontuacao = texto.replace(/[.,\/#!$%\^&@\*;:{}=\-_`~()]/g, ' ');
         const palavras = texto.split(/\s+/);
-        const palavraPesquisadaSemPontuacao = palavraPesquisada.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
-        const ocorrencias = palavras.filter(palavra => palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '') === palavraPesquisada).length;
+        const palavraPesquisadaSemPontuacao = palavraPesquisada.replace(/[.,\/#!$%\^&@\*;:{}=\-_`~()]/g, '');
+        const ocorrencias = palavras.filter(palavra => palavra.replace(/[.,\/#!$%\^&@\*;:{}=\-_`~()]/g, '') === palavraPesquisada).length;
 
         if (ocorrencias > 0) {
           resultados.push({
