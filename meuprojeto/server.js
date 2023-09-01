@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/pesquisar', (req, res) => {
-  const palavraPesquisada = req.query.palavra;
+  const palavraPesquisada = req.query.palavra.toLocaleLowerCase()
   const pastaComPDFs = 'C:/Users/pablo/OneDrive/Documentos/GitHub/JavaScript/meuprojeto/seuarquivo.pdf/'; // Caminho para a pasta com arquivos PDF
   const resultados = [];
 
@@ -29,8 +29,10 @@ app.get('/pesquisar', (req, res) => {
       const dataBuffer = fs.readFileSync(caminhoArquivo);
 
       pdf(dataBuffer).then(data => {
-        const texto = data.text;
+        const texto = data.text.toLocaleLowerCase();
+        const textoSemPontuacao = texto.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ');
         const palavras = texto.split(/\s+/);
+        const palavraPesquisadaSemPontuacao = palavraPesquisada.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
         const ocorrencias = palavras.filter(palavra => palavra === palavraPesquisada).length;
 
         if (ocorrencias > 0) {
