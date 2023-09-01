@@ -33,7 +33,7 @@ app.get('/pesquisar', (req, res) => {
         const textoSemPontuacao = texto.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, ' ');
         const palavras = texto.split(/\s+/);
         const palavraPesquisadaSemPontuacao = palavraPesquisada.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '');
-        const ocorrencias = palavras.filter(palavra => palavra.replace(.,\/#!$%\^&\*;:{}=\-_`~()]/g, '') === palavraPesquisada).length;
+        const ocorrencias = palavras.filter(palavra => palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, '') === palavraPesquisada).length;
 
         if (ocorrencias > 0) {
           resultados.push({
